@@ -106,6 +106,9 @@ pub fn raylibLibrary(b: *std.build.Builder, target: std.build.Target) *std.build
         raylib.linkSystemLibrary("gdi32");
         raylib.addIncludeDir(path ++ "libs/raylib/src/external/glfw/deps/mingw");
     }
+    if (target.isLinux()) {
+        raylib.addIncludeDir("/usr/include");
+    }
 
     // Include dirs.
     raylib.addIncludeDir(path ++ "libs/raylib/src");
