@@ -96,8 +96,7 @@ pub fn raylibLibrary(b: *std.build.Builder, target: std.build.Target) *std.build
     flagContainer.append("-DPLATFORM_DESKTOP") catch unreachable;
     flagContainer.append("-DGL_SILENCE_DEPRECATION") catch unreachable;
     flagContainer.append("-fno-sanitize=undefined") catch unreachable;
-    flagContainer.append("-D_POSIX_C_SOURCE") catch unreachable;
-    flagContainer.append("-Os") catch unreachable;
+    flagContainer.append("-D_POSIX_C_SOURCE=199309L") catch unreachable;
 
     // Link libraries.
     if (target.isWindows()) {
