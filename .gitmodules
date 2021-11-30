@@ -1,0 +1,12 @@
+[submodule "libs/nbnet"]
+	path = libs/nbnet
+	url = git@github.com:nathhB/nbnet.git
+[submodule "libs/cimgui"]
+	path = libs/cimgui
+	url = git@github.com:cimgui/cimgui.git
+[submodule "libs/raylib"]
+	path = libs/raylib
+	url = git@github.com:raysan5/raylib.git
+[submodule "libs/zlm"]
+	path = libs/zlm
+	url = git@github.com:ziglibs/zlm.git
