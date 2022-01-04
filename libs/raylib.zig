@@ -1,11 +1,53 @@
-pub usingnamespace @import("std").zig.c_builtins;
-pub const struct___va_list_tag = extern struct {
-    gp_offset: c_uint,
-    fp_offset: c_uint,
-    overflow_arg_area: ?*c_void,
-    reg_save_area: ?*c_void,
-};
-pub const __builtin_va_list = [1]struct___va_list_tag;
+pub const __builtin_bswap16 = @import("std").zig.c_builtins.__builtin_bswap16;
+pub const __builtin_bswap32 = @import("std").zig.c_builtins.__builtin_bswap32;
+pub const __builtin_bswap64 = @import("std").zig.c_builtins.__builtin_bswap64;
+pub const __builtin_signbit = @import("std").zig.c_builtins.__builtin_signbit;
+pub const __builtin_signbitf = @import("std").zig.c_builtins.__builtin_signbitf;
+pub const __builtin_popcount = @import("std").zig.c_builtins.__builtin_popcount;
+pub const __builtin_ctz = @import("std").zig.c_builtins.__builtin_ctz;
+pub const __builtin_clz = @import("std").zig.c_builtins.__builtin_clz;
+pub const __builtin_sqrt = @import("std").zig.c_builtins.__builtin_sqrt;
+pub const __builtin_sqrtf = @import("std").zig.c_builtins.__builtin_sqrtf;
+pub const __builtin_sin = @import("std").zig.c_builtins.__builtin_sin;
+pub const __builtin_sinf = @import("std").zig.c_builtins.__builtin_sinf;
+pub const __builtin_cos = @import("std").zig.c_builtins.__builtin_cos;
+pub const __builtin_cosf = @import("std").zig.c_builtins.__builtin_cosf;
+pub const __builtin_exp = @import("std").zig.c_builtins.__builtin_exp;
+pub const __builtin_expf = @import("std").zig.c_builtins.__builtin_expf;
+pub const __builtin_exp2 = @import("std").zig.c_builtins.__builtin_exp2;
+pub const __builtin_exp2f = @import("std").zig.c_builtins.__builtin_exp2f;
+pub const __builtin_log = @import("std").zig.c_builtins.__builtin_log;
+pub const __builtin_logf = @import("std").zig.c_builtins.__builtin_logf;
+pub const __builtin_log2 = @import("std").zig.c_builtins.__builtin_log2;
+pub const __builtin_log2f = @import("std").zig.c_builtins.__builtin_log2f;
+pub const __builtin_log10 = @import("std").zig.c_builtins.__builtin_log10;
+pub const __builtin_log10f = @import("std").zig.c_builtins.__builtin_log10f;
+pub const __builtin_abs = @import("std").zig.c_builtins.__builtin_abs;
+pub const __builtin_fabs = @import("std").zig.c_builtins.__builtin_fabs;
+pub const __builtin_fabsf = @import("std").zig.c_builtins.__builtin_fabsf;
+pub const __builtin_floor = @import("std").zig.c_builtins.__builtin_floor;
+pub const __builtin_floorf = @import("std").zig.c_builtins.__builtin_floorf;
+pub const __builtin_ceil = @import("std").zig.c_builtins.__builtin_ceil;
+pub const __builtin_ceilf = @import("std").zig.c_builtins.__builtin_ceilf;
+pub const __builtin_trunc = @import("std").zig.c_builtins.__builtin_trunc;
+pub const __builtin_truncf = @import("std").zig.c_builtins.__builtin_truncf;
+pub const __builtin_round = @import("std").zig.c_builtins.__builtin_round;
+pub const __builtin_roundf = @import("std").zig.c_builtins.__builtin_roundf;
+pub const __builtin_strlen = @import("std").zig.c_builtins.__builtin_strlen;
+pub const __builtin_strcmp = @import("std").zig.c_builtins.__builtin_strcmp;
+pub const __builtin_object_size = @import("std").zig.c_builtins.__builtin_object_size;
+pub const __builtin___memset_chk = @import("std").zig.c_builtins.__builtin___memset_chk;
+pub const __builtin_memset = @import("std").zig.c_builtins.__builtin_memset;
+pub const __builtin___memcpy_chk = @import("std").zig.c_builtins.__builtin___memcpy_chk;
+pub const __builtin_memcpy = @import("std").zig.c_builtins.__builtin_memcpy;
+pub const __builtin_expect = @import("std").zig.c_builtins.__builtin_expect;
+pub const __builtin_nanf = @import("std").zig.c_builtins.__builtin_nanf;
+pub const __builtin_huge_valf = @import("std").zig.c_builtins.__builtin_huge_valf;
+pub const __builtin_inff = @import("std").zig.c_builtins.__builtin_inff;
+pub const __builtin_isnan = @import("std").zig.c_builtins.__builtin_isnan;
+pub const __builtin_isinf = @import("std").zig.c_builtins.__builtin_isinf;
+pub const __builtin_isinf_sign = @import("std").zig.c_builtins.__builtin_isinf_sign;
+pub const __builtin_va_list = [*c]u8;
 pub const va_list = __builtin_va_list;
 pub const __gnuc_va_list = __builtin_va_list;
 pub const struct_Vector2 = extern struct {
@@ -61,7 +103,7 @@ pub const struct_Rectangle = extern struct {
 };
 pub const Rectangle = struct_Rectangle;
 pub const struct_Image = extern struct {
-    data: ?*c_void,
+    data: ?*anyopaque,
     width: c_int,
     height: c_int,
     mipmaps: c_int,
@@ -94,21 +136,21 @@ pub const struct_NPatchInfo = extern struct {
     layout: c_int,
 };
 pub const NPatchInfo = struct_NPatchInfo;
-pub const struct_CharInfo = extern struct {
+pub const struct_GlyphInfo = extern struct {
     value: c_int,
     offsetX: c_int,
     offsetY: c_int,
     advanceX: c_int,
     image: Image,
 };
-pub const CharInfo = struct_CharInfo;
+pub const GlyphInfo = struct_GlyphInfo;
 pub const struct_Font = extern struct {
     baseSize: c_int,
-    charsCount: c_int,
-    charsPadding: c_int,
+    glyphCount: c_int,
+    glyphPadding: c_int,
     texture: Texture2D,
     recs: [*c]Rectangle,
-    chars: [*c]CharInfo,
+    glyphs: [*c]GlyphInfo,
 };
 pub const Font = struct_Font;
 pub const struct_Camera3D = extern struct {
@@ -139,7 +181,7 @@ pub const struct_Mesh = extern struct {
     indices: [*c]c_ushort,
     animVertices: [*c]f32,
     animNormals: [*c]f32,
-    boneIds: [*c]c_int,
+    boneIds: [*c]u8,
     boneWeights: [*c]f32,
     vaoId: c_uint,
     vboId: [*c]c_uint,
@@ -197,24 +239,24 @@ pub const struct_Ray = extern struct {
     direction: Vector3,
 };
 pub const Ray = struct_Ray;
-pub const struct_RayHitInfo = extern struct {
+pub const struct_RayCollision = extern struct {
     hit: bool,
     distance: f32,
-    position: Vector3,
+    point: Vector3,
     normal: Vector3,
 };
-pub const RayHitInfo = struct_RayHitInfo;
+pub const RayCollision = struct_RayCollision;
 pub const struct_BoundingBox = extern struct {
     min: Vector3,
     max: Vector3,
 };
 pub const BoundingBox = struct_BoundingBox;
 pub const struct_Wave = extern struct {
-    sampleCount: c_uint,
+    frameCount: c_uint,
     sampleRate: c_uint,
     sampleSize: c_uint,
     channels: c_uint,
-    data: ?*c_void,
+    data: ?*anyopaque,
 };
 pub const Wave = struct_Wave;
 pub const struct_rAudioBuffer = opaque {};
@@ -228,15 +270,15 @@ pub const struct_AudioStream = extern struct {
 pub const AudioStream = struct_AudioStream;
 pub const struct_Sound = extern struct {
     stream: AudioStream,
-    sampleCount: c_uint,
+    frameCount: c_uint,
 };
 pub const Sound = struct_Sound;
 pub const struct_Music = extern struct {
     stream: AudioStream,
-    sampleCount: c_uint,
+    frameCount: c_uint,
     looping: bool,
     ctxType: c_int,
-    ctxData: ?*c_void,
+    ctxData: ?*anyopaque,
 };
 pub const Music = struct_Music;
 pub const struct_VrDeviceInfo = extern struct {
@@ -331,6 +373,10 @@ pub const KEY_W: c_int = 87;
 pub const KEY_X: c_int = 88;
 pub const KEY_Y: c_int = 89;
 pub const KEY_Z: c_int = 90;
+pub const KEY_LEFT_BRACKET: c_int = 91;
+pub const KEY_BACKSLASH: c_int = 92;
+pub const KEY_RIGHT_BRACKET: c_int = 93;
+pub const KEY_GRAVE: c_int = 96;
 pub const KEY_SPACE: c_int = 32;
 pub const KEY_ESCAPE: c_int = 256;
 pub const KEY_ENTER: c_int = 257;
@@ -372,10 +418,6 @@ pub const KEY_RIGHT_CONTROL: c_int = 345;
 pub const KEY_RIGHT_ALT: c_int = 346;
 pub const KEY_RIGHT_SUPER: c_int = 347;
 pub const KEY_KB_MENU: c_int = 348;
-pub const KEY_LEFT_BRACKET: c_int = 91;
-pub const KEY_BACKSLASH: c_int = 92;
-pub const KEY_RIGHT_BRACKET: c_int = 93;
-pub const KEY_GRAVE: c_int = 96;
 pub const KEY_KP_0: c_int = 320;
 pub const KEY_KP_1: c_int = 321;
 pub const KEY_KP_2: c_int = 322;
@@ -398,9 +440,13 @@ pub const KEY_MENU: c_int = 82;
 pub const KEY_VOLUME_UP: c_int = 24;
 pub const KEY_VOLUME_DOWN: c_int = 25;
 pub const KeyboardKey = c_uint;
-pub const MOUSE_LEFT_BUTTON: c_int = 0;
-pub const MOUSE_RIGHT_BUTTON: c_int = 1;
-pub const MOUSE_MIDDLE_BUTTON: c_int = 2;
+pub const MOUSE_BUTTON_LEFT: c_int = 0;
+pub const MOUSE_BUTTON_RIGHT: c_int = 1;
+pub const MOUSE_BUTTON_MIDDLE: c_int = 2;
+pub const MOUSE_BUTTON_SIDE: c_int = 3;
+pub const MOUSE_BUTTON_EXTRA: c_int = 4;
+pub const MOUSE_BUTTON_FORWARD: c_int = 5;
+pub const MOUSE_BUTTON_BACK: c_int = 6;
 pub const MouseButton = c_uint;
 pub const MOUSE_CURSOR_DEFAULT: c_int = 0;
 pub const MOUSE_CURSOR_ARROW: c_int = 1;
@@ -447,10 +493,10 @@ pub const MATERIAL_MAP_ROUGHNESS: c_int = 3;
 pub const MATERIAL_MAP_OCCLUSION: c_int = 4;
 pub const MATERIAL_MAP_EMISSION: c_int = 5;
 pub const MATERIAL_MAP_HEIGHT: c_int = 6;
-pub const MATERIAL_MAP_BRDG: c_int = 7;
-pub const MATERIAL_MAP_CUBEMAP: c_int = 8;
-pub const MATERIAL_MAP_IRRADIANCE: c_int = 9;
-pub const MATERIAL_MAP_PREFILTER: c_int = 10;
+pub const MATERIAL_MAP_CUBEMAP: c_int = 7;
+pub const MATERIAL_MAP_IRRADIANCE: c_int = 8;
+pub const MATERIAL_MAP_PREFILTER: c_int = 9;
+pub const MATERIAL_MAP_BRDF: c_int = 10;
 pub const MaterialMapIndex = c_uint;
 pub const SHADER_LOC_VERTEX_POSITION: c_int = 0;
 pub const SHADER_LOC_VERTEX_TEXCOORD01: c_int = 1;
@@ -489,13 +535,18 @@ pub const SHADER_UNIFORM_IVEC3: c_int = 6;
 pub const SHADER_UNIFORM_IVEC4: c_int = 7;
 pub const SHADER_UNIFORM_SAMPLER2D: c_int = 8;
 pub const ShaderUniformDataType = c_uint;
+pub const SHADER_ATTRIB_FLOAT: c_int = 0;
+pub const SHADER_ATTRIB_VEC2: c_int = 1;
+pub const SHADER_ATTRIB_VEC3: c_int = 2;
+pub const SHADER_ATTRIB_VEC4: c_int = 3;
+pub const ShaderAttributeDataType = c_uint;
 pub const PIXELFORMAT_UNCOMPRESSED_GRAYSCALE: c_int = 1;
 pub const PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA: c_int = 2;
 pub const PIXELFORMAT_UNCOMPRESSED_R5G6B5: c_int = 3;
 pub const PIXELFORMAT_UNCOMPRESSED_R8G8B8: c_int = 4;
 pub const PIXELFORMAT_UNCOMPRESSED_R5G5B5A1: c_int = 5;
 pub const PIXELFORMAT_UNCOMPRESSED_R4G4B4A4: c_int = 6;
-pub const PIXELFORMAT_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8: c_int = 7;
+pub const PIXELFORMAT_UNCOMPRESSED_R8G8B8A8: c_int = 7;
 pub const PIXELFORMAT_UNCOMPRESSED_R32: c_int = 8;
 pub const PIXELFORMAT_UNCOMPRESSED_R32G32B32: c_int = 9;
 pub const PIXELFORMAT_UNCOMPRESSED_R32G32B32A32: c_int = 10;
@@ -552,7 +603,7 @@ pub const GESTURE_SWIPE_UP: c_int = 64;
 pub const GESTURE_SWIPE_DOWN: c_int = 128;
 pub const GESTURE_PINCH_IN: c_int = 256;
 pub const GESTURE_PINCH_OUT: c_int = 512;
-pub const Gestures = c_uint;
+pub const Gesture = c_uint;
 pub const CAMERA_CUSTOM: c_int = 0;
 pub const CAMERA_FREE: c_int = 1;
 pub const CAMERA_ORBITAL: c_int = 2;
@@ -566,9 +617,9 @@ pub const NPATCH_NINE_PATCH: c_int = 0;
 pub const NPATCH_THREE_PATCH_VERTICAL: c_int = 1;
 pub const NPATCH_THREE_PATCH_HORIZONTAL: c_int = 2;
 pub const NPatchLayout = c_uint;
-pub const TraceLogCallback = ?fn (c_int, [*c]const u8, [*c]struct___va_list_tag) callconv(.C) void;
+pub const TraceLogCallback = ?fn (c_int, [*c]const u8, va_list) callconv(.C) void;
 pub const LoadFileDataCallback = ?fn ([*c]const u8, [*c]c_uint) callconv(.C) [*c]u8;
-pub const SaveFileDataCallback = ?fn ([*c]const u8, ?*c_void, c_uint) callconv(.C) bool;
+pub const SaveFileDataCallback = ?fn ([*c]const u8, ?*anyopaque, c_uint) callconv(.C) bool;
 pub const LoadFileTextCallback = ?fn ([*c]const u8) callconv(.C) [*c]u8;
 pub const SaveFileTextCallback = ?fn ([*c]const u8, [*c]u8) callconv(.C) bool;
 pub extern fn InitWindow(width: c_int, height: c_int, title: [*c]const u8) void;
@@ -594,9 +645,11 @@ pub extern fn SetWindowPosition(x: c_int, y: c_int) void;
 pub extern fn SetWindowMonitor(monitor: c_int) void;
 pub extern fn SetWindowMinSize(width: c_int, height: c_int) void;
 pub extern fn SetWindowSize(width: c_int, height: c_int) void;
-pub extern fn GetWindowHandle() ?*c_void;
+pub extern fn GetWindowHandle() ?*anyopaque;
 pub extern fn GetScreenWidth() c_int;
 pub extern fn GetScreenHeight() c_int;
+pub extern fn GetRenderWidth() c_int;
+pub extern fn GetRenderHeight() c_int;
 pub extern fn GetMonitorCount() c_int;
 pub extern fn GetCurrentMonitor() c_int;
 pub extern fn GetMonitorPosition(monitor: c_int) Vector2;
@@ -610,6 +663,9 @@ pub extern fn GetWindowScaleDPI() Vector2;
 pub extern fn GetMonitorName(monitor: c_int) [*c]const u8;
 pub extern fn SetClipboardText(text: [*c]const u8) void;
 pub extern fn GetClipboardText() [*c]const u8;
+pub extern fn SwapScreenBuffer() void;
+pub extern fn PollInputEvents() void;
+pub extern fn WaitTime(ms: f32) void;
 pub extern fn ShowCursor() void;
 pub extern fn HideCursor() void;
 pub extern fn IsCursorHidden() bool;
@@ -639,8 +695,8 @@ pub extern fn LoadShader(vsFileName: [*c]const u8, fsFileName: [*c]const u8) Sha
 pub extern fn LoadShaderFromMemory(vsCode: [*c]const u8, fsCode: [*c]const u8) Shader;
 pub extern fn GetShaderLocation(shader: Shader, uniformName: [*c]const u8) c_int;
 pub extern fn GetShaderLocationAttrib(shader: Shader, attribName: [*c]const u8) c_int;
-pub extern fn SetShaderValue(shader: Shader, locIndex: c_int, value: ?*const c_void, uniformType: c_int) void;
-pub extern fn SetShaderValueV(shader: Shader, locIndex: c_int, value: ?*const c_void, uniformType: c_int, count: c_int) void;
+pub extern fn SetShaderValue(shader: Shader, locIndex: c_int, value: ?*const anyopaque, uniformType: c_int) void;
+pub extern fn SetShaderValueV(shader: Shader, locIndex: c_int, value: ?*const anyopaque, uniformType: c_int, count: c_int) void;
 pub extern fn SetShaderValueMatrix(shader: Shader, locIndex: c_int, mat: Matrix) void;
 pub extern fn SetShaderValueTexture(shader: Shader, locIndex: c_int, texture: Texture2D) void;
 pub extern fn UnloadShader(shader: Shader) void;
@@ -656,13 +712,14 @@ pub extern fn GetFPS() c_int;
 pub extern fn GetFrameTime() f32;
 pub extern fn GetTime() f64;
 pub extern fn GetRandomValue(min: c_int, max: c_int) c_int;
+pub extern fn SetRandomSeed(seed: c_uint) void;
 pub extern fn TakeScreenshot(fileName: [*c]const u8) void;
 pub extern fn SetConfigFlags(flags: c_uint) void;
 pub extern fn TraceLog(logLevel: c_int, text: [*c]const u8, ...) void;
 pub extern fn SetTraceLogLevel(logLevel: c_int) void;
-pub extern fn MemAlloc(size: c_int) ?*c_void;
-pub extern fn MemRealloc(ptr: ?*c_void, size: c_int) ?*c_void;
-pub extern fn MemFree(ptr: ?*c_void) void;
+pub extern fn MemAlloc(size: c_int) ?*anyopaque;
+pub extern fn MemRealloc(ptr: ?*anyopaque, size: c_int) ?*anyopaque;
+pub extern fn MemFree(ptr: ?*anyopaque) void;
 pub extern fn SetTraceLogCallback(callback: TraceLogCallback) void;
 pub extern fn SetLoadFileDataCallback(callback: LoadFileDataCallback) void;
 pub extern fn SetSaveFileDataCallback(callback: SaveFileDataCallback) void;
@@ -670,7 +727,7 @@ pub extern fn SetLoadFileTextCallback(callback: LoadFileTextCallback) void;
 pub extern fn SetSaveFileTextCallback(callback: SaveFileTextCallback) void;
 pub extern fn LoadFileData(fileName: [*c]const u8, bytesRead: [*c]c_uint) [*c]u8;
 pub extern fn UnloadFileData(data: [*c]u8) void;
-pub extern fn SaveFileData(fileName: [*c]const u8, data: ?*c_void, bytesToWrite: c_uint) bool;
+pub extern fn SaveFileData(fileName: [*c]const u8, data: ?*anyopaque, bytesToWrite: c_uint) bool;
 pub extern fn LoadFileText(fileName: [*c]const u8) [*c]u8;
 pub extern fn UnloadFileText(text: [*c]u8) void;
 pub extern fn SaveFileText(fileName: [*c]const u8, text: [*c]u8) bool;
@@ -692,6 +749,8 @@ pub extern fn ClearDroppedFiles() void;
 pub extern fn GetFileModTime(fileName: [*c]const u8) c_long;
 pub extern fn CompressData(data: [*c]u8, dataLength: c_int, compDataLength: [*c]c_int) [*c]u8;
 pub extern fn DecompressData(compData: [*c]u8, compDataLength: c_int, dataLength: [*c]c_int) [*c]u8;
+pub extern fn EncodeDataBase64(data: [*c]const u8, dataLength: c_int, outputLength: [*c]c_int) [*c]u8;
+pub extern fn DecodeDataBase64(data: [*c]u8, outputLength: [*c]c_int) [*c]u8;
 pub extern fn SaveStorageValue(position: c_uint, value: c_int) bool;
 pub extern fn LoadStorageValue(position: c_uint) c_int;
 pub extern fn OpenURL(url: [*c]const u8) void;
@@ -703,7 +762,6 @@ pub extern fn SetExitKey(key: c_int) void;
 pub extern fn GetKeyPressed() c_int;
 pub extern fn GetCharPressed() c_int;
 pub extern fn IsGamepadAvailable(gamepad: c_int) bool;
-pub extern fn IsGamepadName(gamepad: c_int, name: [*c]const u8) bool;
 pub extern fn GetGamepadName(gamepad: c_int) [*c]const u8;
 pub extern fn IsGamepadButtonPressed(gamepad: c_int, button: c_int) bool;
 pub extern fn IsGamepadButtonDown(gamepad: c_int, button: c_int) bool;
@@ -720,6 +778,7 @@ pub extern fn IsMouseButtonUp(button: c_int) bool;
 pub extern fn GetMouseX() c_int;
 pub extern fn GetMouseY() c_int;
 pub extern fn GetMousePosition() Vector2;
+pub extern fn GetMouseDelta() Vector2;
 pub extern fn SetMousePosition(x: c_int, y: c_int) void;
 pub extern fn SetMouseOffset(offsetX: c_int, offsetY: c_int) void;
 pub extern fn SetMouseScale(scaleX: f32, scaleY: f32) void;
@@ -728,10 +787,11 @@ pub extern fn SetMouseCursor(cursor: c_int) void;
 pub extern fn GetTouchX() c_int;
 pub extern fn GetTouchY() c_int;
 pub extern fn GetTouchPosition(index: c_int) Vector2;
+pub extern fn GetTouchPointId(index: c_int) c_int;
+pub extern fn GetTouchPointCount() c_int;
 pub extern fn SetGesturesEnabled(flags: c_uint) void;
 pub extern fn IsGestureDetected(gesture: c_int) bool;
 pub extern fn GetGestureDetected() c_int;
-pub extern fn GetTouchPointsCount() c_int;
 pub extern fn GetGestureHoldDuration() f32;
 pub extern fn GetGestureDragVector() Vector2;
 pub extern fn GetGestureDragAngle() f32;
@@ -751,7 +811,8 @@ pub extern fn DrawLineV(startPos: Vector2, endPos: Vector2, color: Color) void;
 pub extern fn DrawLineEx(startPos: Vector2, endPos: Vector2, thick: f32, color: Color) void;
 pub extern fn DrawLineBezier(startPos: Vector2, endPos: Vector2, thick: f32, color: Color) void;
 pub extern fn DrawLineBezierQuad(startPos: Vector2, endPos: Vector2, controlPos: Vector2, thick: f32, color: Color) void;
-pub extern fn DrawLineStrip(points: [*c]Vector2, pointsCount: c_int, color: Color) void;
+pub extern fn DrawLineBezierCubic(startPos: Vector2, endPos: Vector2, startControlPos: Vector2, endControlPos: Vector2, thick: f32, color: Color) void;
+pub extern fn DrawLineStrip(points: [*c]Vector2, pointCount: c_int, color: Color) void;
 pub extern fn DrawCircle(centerX: c_int, centerY: c_int, radius: f32, color: Color) void;
 pub extern fn DrawCircleSector(center: Vector2, radius: f32, startAngle: f32, endAngle: f32, segments: c_int, color: Color) void;
 pub extern fn DrawCircleSectorLines(center: Vector2, radius: f32, startAngle: f32, endAngle: f32, segments: c_int, color: Color) void;
@@ -770,15 +831,16 @@ pub extern fn DrawRectangleGradientV(posX: c_int, posY: c_int, width: c_int, hei
 pub extern fn DrawRectangleGradientH(posX: c_int, posY: c_int, width: c_int, height: c_int, color1: Color, color2: Color) void;
 pub extern fn DrawRectangleGradientEx(rec: Rectangle, col1: Color, col2: Color, col3: Color, col4: Color) void;
 pub extern fn DrawRectangleLines(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color) void;
-pub extern fn DrawRectangleLinesEx(rec: Rectangle, lineThick: c_int, color: Color) void;
+pub extern fn DrawRectangleLinesEx(rec: Rectangle, lineThick: f32, color: Color) void;
 pub extern fn DrawRectangleRounded(rec: Rectangle, roundness: f32, segments: c_int, color: Color) void;
-pub extern fn DrawRectangleRoundedLines(rec: Rectangle, roundness: f32, segments: c_int, lineThick: c_int, color: Color) void;
+pub extern fn DrawRectangleRoundedLines(rec: Rectangle, roundness: f32, segments: c_int, lineThick: f32, color: Color) void;
 pub extern fn DrawTriangle(v1: Vector2, v2: Vector2, v3: Vector2, color: Color) void;
 pub extern fn DrawTriangleLines(v1: Vector2, v2: Vector2, v3: Vector2, color: Color) void;
-pub extern fn DrawTriangleFan(points: [*c]Vector2, pointsCount: c_int, color: Color) void;
-pub extern fn DrawTriangleStrip(points: [*c]Vector2, pointsCount: c_int, color: Color) void;
+pub extern fn DrawTriangleFan(points: [*c]Vector2, pointCount: c_int, color: Color) void;
+pub extern fn DrawTriangleStrip(points: [*c]Vector2, pointCount: c_int, color: Color) void;
 pub extern fn DrawPoly(center: Vector2, sides: c_int, radius: f32, rotation: f32, color: Color) void;
 pub extern fn DrawPolyLines(center: Vector2, sides: c_int, radius: f32, rotation: f32, color: Color) void;
+pub extern fn DrawPolyLinesEx(center: Vector2, sides: c_int, radius: f32, rotation: f32, lineThick: f32, color: Color) void;
 pub extern fn CheckCollisionRecs(rec1: Rectangle, rec2: Rectangle) bool;
 pub extern fn CheckCollisionCircles(center1: Vector2, radius1: f32, center2: Vector2, radius2: f32) bool;
 pub extern fn CheckCollisionCircleRec(center: Vector2, radius: f32, rec: Rectangle) bool;
@@ -786,11 +848,14 @@ pub extern fn CheckCollisionPointRec(point: Vector2, rec: Rectangle) bool;
 pub extern fn CheckCollisionPointCircle(point: Vector2, center: Vector2, radius: f32) bool;
 pub extern fn CheckCollisionPointTriangle(point: Vector2, p1: Vector2, p2: Vector2, p3: Vector2) bool;
 pub extern fn CheckCollisionLines(startPos1: Vector2, endPos1: Vector2, startPos2: Vector2, endPos2: Vector2, collisionPoint: [*c]Vector2) bool;
+pub extern fn CheckCollisionPointLine(point: Vector2, p1: Vector2, p2: Vector2, threshold: c_int) bool;
 pub extern fn GetCollisionRec(rec1: Rectangle, rec2: Rectangle) Rectangle;
 pub extern fn LoadImage(fileName: [*c]const u8) Image;
 pub extern fn LoadImageRaw(fileName: [*c]const u8, width: c_int, height: c_int, format: c_int, headerSize: c_int) Image;
 pub extern fn LoadImageAnim(fileName: [*c]const u8, frames: [*c]c_int) Image;
 pub extern fn LoadImageFromMemory(fileType: [*c]const u8, fileData: [*c]const u8, dataSize: c_int) Image;
+pub extern fn LoadImageFromTexture(texture: Texture2D) Image;
+pub extern fn LoadImageFromScreen() Image;
 pub extern fn UnloadImage(image: Image) void;
 pub extern fn ExportImage(image: Image, fileName: [*c]const u8) bool;
 pub extern fn ExportImageAsCode(image: Image, fileName: [*c]const u8) bool;
@@ -800,7 +865,6 @@ pub extern fn GenImageGradientH(width: c_int, height: c_int, left: Color, right:
 pub extern fn GenImageGradientRadial(width: c_int, height: c_int, density: f32, inner: Color, outer: Color) Image;
 pub extern fn GenImageChecked(width: c_int, height: c_int, checksX: c_int, checksY: c_int, col1: Color, col2: Color) Image;
 pub extern fn GenImageWhiteNoise(width: c_int, height: c_int, factor: f32) Image;
-pub extern fn GenImagePerlinNoise(width: c_int, height: c_int, offsetX: c_int, offsetY: c_int, scale: f32) Image;
 pub extern fn GenImageCellular(width: c_int, height: c_int, tileSize: c_int) Image;
 pub extern fn ImageCopy(image: Image) Image;
 pub extern fn ImageFromImage(image: Image, rec: Rectangle) Image;
@@ -829,10 +893,11 @@ pub extern fn ImageColorContrast(image: [*c]Image, contrast: f32) void;
 pub extern fn ImageColorBrightness(image: [*c]Image, brightness: c_int) void;
 pub extern fn ImageColorReplace(image: [*c]Image, color: Color, replace: Color) void;
 pub extern fn LoadImageColors(image: Image) [*c]Color;
-pub extern fn LoadImagePalette(image: Image, maxPaletteSize: c_int, colorsCount: [*c]c_int) [*c]Color;
+pub extern fn LoadImagePalette(image: Image, maxPaletteSize: c_int, colorCount: [*c]c_int) [*c]Color;
 pub extern fn UnloadImageColors(colors: [*c]Color) void;
 pub extern fn UnloadImagePalette(colors: [*c]Color) void;
 pub extern fn GetImageAlphaBorder(image: Image, threshold: f32) Rectangle;
+pub extern fn GetImageColor(image: Image, x: c_int, y: c_int) Color;
 pub extern fn ImageClearBackground(dst: [*c]Image, color: Color) void;
 pub extern fn ImageDrawPixel(dst: [*c]Image, posX: c_int, posY: c_int, color: Color) void;
 pub extern fn ImageDrawPixelV(dst: [*c]Image, position: Vector2, color: Color) void;
@@ -853,10 +918,8 @@ pub extern fn LoadTextureCubemap(image: Image, layout: c_int) TextureCubemap;
 pub extern fn LoadRenderTexture(width: c_int, height: c_int) RenderTexture2D;
 pub extern fn UnloadTexture(texture: Texture2D) void;
 pub extern fn UnloadRenderTexture(target: RenderTexture2D) void;
-pub extern fn UpdateTexture(texture: Texture2D, pixels: ?*const c_void) void;
-pub extern fn UpdateTextureRec(texture: Texture2D, rec: Rectangle, pixels: ?*const c_void) void;
-pub extern fn GetTextureData(texture: Texture2D) Image;
-pub extern fn GetScreenData() Image;
+pub extern fn UpdateTexture(texture: Texture2D, pixels: ?*const anyopaque) void;
+pub extern fn UpdateTextureRec(texture: Texture2D, rec: Rectangle, pixels: ?*const anyopaque) void;
 pub extern fn GenTextureMipmaps(texture: [*c]Texture2D) void;
 pub extern fn SetTextureFilter(texture: Texture2D, filter: c_int) void;
 pub extern fn SetTextureWrap(texture: Texture2D, wrap: c_int) void;
@@ -868,7 +931,7 @@ pub extern fn DrawTextureQuad(texture: Texture2D, tiling: Vector2, offset: Vecto
 pub extern fn DrawTextureTiled(texture: Texture2D, source: Rectangle, dest: Rectangle, origin: Vector2, rotation: f32, scale: f32, tint: Color) void;
 pub extern fn DrawTexturePro(texture: Texture2D, source: Rectangle, dest: Rectangle, origin: Vector2, rotation: f32, tint: Color) void;
 pub extern fn DrawTextureNPatch(texture: Texture2D, nPatchInfo: NPatchInfo, dest: Rectangle, origin: Vector2, rotation: f32, tint: Color) void;
-pub extern fn DrawTexturePoly(texture: Texture2D, center: Vector2, points: [*c]Vector2, texcoords: [*c]Vector2, pointsCount: c_int, tint: Color) void;
+pub extern fn DrawTexturePoly(texture: Texture2D, center: Vector2, points: [*c]Vector2, texcoords: [*c]Vector2, pointCount: c_int, tint: Color) void;
 pub extern fn Fade(color: Color, alpha: f32) Color;
 pub extern fn ColorToInt(color: Color) c_int;
 pub extern fn ColorNormalize(color: Color) Vector4;
@@ -877,28 +940,35 @@ pub extern fn ColorToHSV(color: Color) Vector3;
 pub extern fn ColorFromHSV(hue: f32, saturation: f32, value: f32) Color;
 pub extern fn ColorAlpha(color: Color, alpha: f32) Color;
 pub extern fn ColorAlphaBlend(dst: Color, src: Color, tint: Color) Color;
-pub extern fn GetColor(hexValue: c_int) Color;
-pub extern fn GetPixelColor(srcPtr: ?*c_void, format: c_int) Color;
-pub extern fn SetPixelColor(dstPtr: ?*c_void, color: Color, format: c_int) void;
+pub extern fn GetColor(hexValue: c_uint) Color;
+pub extern fn GetPixelColor(srcPtr: ?*anyopaque, format: c_int) Color;
+pub extern fn SetPixelColor(dstPtr: ?*anyopaque, color: Color, format: c_int) void;
 pub extern fn GetPixelDataSize(width: c_int, height: c_int, format: c_int) c_int;
 pub extern fn GetFontDefault() Font;
 pub extern fn LoadFont(fileName: [*c]const u8) Font;
-pub extern fn LoadFontEx(fileName: [*c]const u8, fontSize: c_int, fontChars: [*c]c_int, charsCount: c_int) Font;
+pub extern fn LoadFontEx(fileName: [*c]const u8, fontSize: c_int, fontChars: [*c]c_int, glyphCount: c_int) Font;
 pub extern fn LoadFontFromImage(image: Image, key: Color, firstChar: c_int) Font;
-pub extern fn LoadFontFromMemory(fileType: [*c]const u8, fileData: [*c]const u8, dataSize: c_int, fontSize: c_int, fontChars: [*c]c_int, charsCount: c_int) Font;
-pub extern fn LoadFontData(fileData: [*c]const u8, dataSize: c_int, fontSize: c_int, fontChars: [*c]c_int, charsCount: c_int, type: c_int) [*c]CharInfo;
-pub extern fn GenImageFontAtlas(chars: [*c]const CharInfo, recs: [*c][*c]Rectangle, charsCount: c_int, fontSize: c_int, padding: c_int, packMethod: c_int) Image;
-pub extern fn UnloadFontData(chars: [*c]CharInfo, charsCount: c_int) void;
+pub extern fn LoadFontFromMemory(fileType: [*c]const u8, fileData: [*c]const u8, dataSize: c_int, fontSize: c_int, fontChars: [*c]c_int, glyphCount: c_int) Font;
+pub extern fn LoadFontData(fileData: [*c]const u8, dataSize: c_int, fontSize: c_int, fontChars: [*c]c_int, glyphCount: c_int, @"type": c_int) [*c]GlyphInfo;
+pub extern fn GenImageFontAtlas(chars: [*c]const GlyphInfo, recs: [*c][*c]Rectangle, glyphCount: c_int, fontSize: c_int, padding: c_int, packMethod: c_int) Image;
+pub extern fn UnloadFontData(chars: [*c]GlyphInfo, glyphCount: c_int) void;
 pub extern fn UnloadFont(font: Font) void;
 pub extern fn DrawFPS(posX: c_int, posY: c_int) void;
 pub extern fn DrawText(text: [*c]const u8, posX: c_int, posY: c_int, fontSize: c_int, color: Color) void;
 pub extern fn DrawTextEx(font: Font, text: [*c]const u8, position: Vector2, fontSize: f32, spacing: f32, tint: Color) void;
-pub extern fn DrawTextRec(font: Font, text: [*c]const u8, rec: Rectangle, fontSize: f32, spacing: f32, wordWrap: bool, tint: Color) void;
-pub extern fn DrawTextRecEx(font: Font, text: [*c]const u8, rec: Rectangle, fontSize: f32, spacing: f32, wordWrap: bool, tint: Color, selectStart: c_int, selectLength: c_int, selectTint: Color, selectBackTint: Color) void;
+pub extern fn DrawTextPro(font: Font, text: [*c]const u8, position: Vector2, origin: Vector2, rotation: f32, fontSize: f32, spacing: f32, tint: Color) void;
 pub extern fn DrawTextCodepoint(font: Font, codepoint: c_int, position: Vector2, fontSize: f32, tint: Color) void;
 pub extern fn MeasureText(text: [*c]const u8, fontSize: c_int) c_int;
 pub extern fn MeasureTextEx(font: Font, text: [*c]const u8, fontSize: f32, spacing: f32) Vector2;
 pub extern fn GetGlyphIndex(font: Font, codepoint: c_int) c_int;
+pub extern fn GetGlyphInfo(font: Font, codepoint: c_int) GlyphInfo;
+pub extern fn GetGlyphAtlasRec(font: Font, codepoint: c_int) Rectangle;
+pub extern fn LoadCodepoints(text: [*c]const u8, count: [*c]c_int) [*c]c_int;
+pub extern fn UnloadCodepoints(codepoints: [*c]c_int) void;
+pub extern fn GetCodepointCount(text: [*c]const u8) c_int;
+pub extern fn GetCodepoint(text: [*c]const u8, bytesProcessed: [*c]c_int) c_int;
+pub extern fn CodepointToUTF8(codepoint: c_int, byteSize: [*c]c_int) [*c]const u8;
+pub extern fn TextCodepointsToUTF8(codepoints: [*c]c_int, length: c_int) [*c]u8;
 pub extern fn TextCopy(dst: [*c]u8, src: [*c]const u8) c_int;
 pub extern fn TextIsEqual(text1: [*c]const u8, text2: [*c]const u8) bool;
 pub extern fn TextLength(text: [*c]const u8) c_uint;
@@ -914,26 +984,24 @@ pub extern fn TextToUpper(text: [*c]const u8) [*c]const u8;
 pub extern fn TextToLower(text: [*c]const u8) [*c]const u8;
 pub extern fn TextToPascal(text: [*c]const u8) [*c]const u8;
 pub extern fn TextToInteger(text: [*c]const u8) c_int;
-pub extern fn TextToUtf8(codepoints: [*c]c_int, length: c_int) [*c]u8;
-pub extern fn GetCodepoints(text: [*c]const u8, count: [*c]c_int) [*c]c_int;
-pub extern fn GetCodepointsCount(text: [*c]const u8) c_int;
-pub extern fn GetNextCodepoint(text: [*c]const u8, bytesProcessed: [*c]c_int) c_int;
-pub extern fn CodepointToUtf8(codepoint: c_int, byteLength: [*c]c_int) [*c]const u8;
 pub extern fn DrawLine3D(startPos: Vector3, endPos: Vector3, color: Color) void;
 pub extern fn DrawPoint3D(position: Vector3, color: Color) void;
 pub extern fn DrawCircle3D(center: Vector3, radius: f32, rotationAxis: Vector3, rotationAngle: f32, color: Color) void;
 pub extern fn DrawTriangle3D(v1: Vector3, v2: Vector3, v3: Vector3, color: Color) void;
-pub extern fn DrawTriangleStrip3D(points: [*c]Vector3, pointsCount: c_int, color: Color) void;
+pub extern fn DrawTriangleStrip3D(points: [*c]Vector3, pointCount: c_int, color: Color) void;
 pub extern fn DrawCube(position: Vector3, width: f32, height: f32, length: f32, color: Color) void;
 pub extern fn DrawCubeV(position: Vector3, size: Vector3, color: Color) void;
 pub extern fn DrawCubeWires(position: Vector3, width: f32, height: f32, length: f32, color: Color) void;
 pub extern fn DrawCubeWiresV(position: Vector3, size: Vector3, color: Color) void;
 pub extern fn DrawCubeTexture(texture: Texture2D, position: Vector3, width: f32, height: f32, length: f32, color: Color) void;
+pub extern fn DrawCubeTextureRec(texture: Texture2D, source: Rectangle, position: Vector3, width: f32, height: f32, length: f32, color: Color) void;
 pub extern fn DrawSphere(centerPos: Vector3, radius: f32, color: Color) void;
 pub extern fn DrawSphereEx(centerPos: Vector3, radius: f32, rings: c_int, slices: c_int, color: Color) void;
 pub extern fn DrawSphereWires(centerPos: Vector3, radius: f32, rings: c_int, slices: c_int, color: Color) void;
 pub extern fn DrawCylinder(position: Vector3, radiusTop: f32, radiusBottom: f32, height: f32, slices: c_int, color: Color) void;
+pub extern fn DrawCylinderEx(startPos: Vector3, endPos: Vector3, startRadius: f32, endRadius: f32, sides: c_int, color: Color) void;
 pub extern fn DrawCylinderWires(position: Vector3, radiusTop: f32, radiusBottom: f32, height: f32, slices: c_int, color: Color) void;
+pub extern fn DrawCylinderWiresEx(startPos: Vector3, endPos: Vector3, startRadius: f32, endRadius: f32, sides: c_int, color: Color) void;
 pub extern fn DrawPlane(centerPos: Vector3, size: Vector2, color: Color) void;
 pub extern fn DrawRay(ray: Ray, color: Color) void;
 pub extern fn DrawGrid(slices: c_int, spacing: f32) void;
@@ -941,52 +1009,54 @@ pub extern fn LoadModel(fileName: [*c]const u8) Model;
 pub extern fn LoadModelFromMesh(mesh: Mesh) Model;
 pub extern fn UnloadModel(model: Model) void;
 pub extern fn UnloadModelKeepMeshes(model: Model) void;
+pub extern fn GetModelBoundingBox(model: Model) BoundingBox;
+pub extern fn DrawModel(model: Model, position: Vector3, scale: f32, tint: Color) void;
+pub extern fn DrawModelEx(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: f32, scale: Vector3, tint: Color) void;
+pub extern fn DrawModelWires(model: Model, position: Vector3, scale: f32, tint: Color) void;
+pub extern fn DrawModelWiresEx(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: f32, scale: Vector3, tint: Color) void;
+pub extern fn DrawBoundingBox(box: BoundingBox, color: Color) void;
+pub extern fn DrawBillboard(camera: Camera, texture: Texture2D, position: Vector3, size: f32, tint: Color) void;
+pub extern fn DrawBillboardRec(camera: Camera, texture: Texture2D, source: Rectangle, position: Vector3, size: Vector2, tint: Color) void;
+pub extern fn DrawBillboardPro(camera: Camera, texture: Texture2D, source: Rectangle, position: Vector3, up: Vector3, size: Vector2, origin: Vector2, rotation: f32, tint: Color) void;
 pub extern fn UploadMesh(mesh: [*c]Mesh, dynamic: bool) void;
-pub extern fn UpdateMeshBuffer(mesh: Mesh, index: c_int, data: ?*c_void, dataSize: c_int, offset: c_int) void;
+pub extern fn UpdateMeshBuffer(mesh: Mesh, index: c_int, data: ?*anyopaque, dataSize: c_int, offset: c_int) void;
+pub extern fn UnloadMesh(mesh: Mesh) void;
 pub extern fn DrawMesh(mesh: Mesh, material: Material, transform: Matrix) void;
 pub extern fn DrawMeshInstanced(mesh: Mesh, material: Material, transforms: [*c]Matrix, instances: c_int) void;
-pub extern fn UnloadMesh(mesh: Mesh) void;
 pub extern fn ExportMesh(mesh: Mesh, fileName: [*c]const u8) bool;
-pub extern fn LoadMaterials(fileName: [*c]const u8, materialCount: [*c]c_int) [*c]Material;
-pub extern fn LoadMaterialDefault() Material;
-pub extern fn UnloadMaterial(material: Material) void;
-pub extern fn SetMaterialTexture(material: [*c]Material, mapType: c_int, texture: Texture2D) void;
-pub extern fn SetModelMeshMaterial(model: [*c]Model, meshId: c_int, materialId: c_int) void;
-pub extern fn LoadModelAnimations(fileName: [*c]const u8, animsCount: [*c]c_int) [*c]ModelAnimation;
-pub extern fn UpdateModelAnimation(model: Model, anim: ModelAnimation, frame: c_int) void;
-pub extern fn UnloadModelAnimation(anim: ModelAnimation) void;
-pub extern fn UnloadModelAnimations(animations: [*c]ModelAnimation, count: c_uint) void;
-pub extern fn IsModelAnimationValid(model: Model, anim: ModelAnimation) bool;
+pub extern fn GetMeshBoundingBox(mesh: Mesh) BoundingBox;
+pub extern fn GenMeshTangents(mesh: [*c]Mesh) void;
+pub extern fn GenMeshBinormals(mesh: [*c]Mesh) void;
 pub extern fn GenMeshPoly(sides: c_int, radius: f32) Mesh;
 pub extern fn GenMeshPlane(width: f32, length: f32, resX: c_int, resZ: c_int) Mesh;
 pub extern fn GenMeshCube(width: f32, height: f32, length: f32) Mesh;
 pub extern fn GenMeshSphere(radius: f32, rings: c_int, slices: c_int) Mesh;
 pub extern fn GenMeshHemiSphere(radius: f32, rings: c_int, slices: c_int) Mesh;
 pub extern fn GenMeshCylinder(radius: f32, height: f32, slices: c_int) Mesh;
+pub extern fn GenMeshCone(radius: f32, height: f32, slices: c_int) Mesh;
 pub extern fn GenMeshTorus(radius: f32, size: f32, radSeg: c_int, sides: c_int) Mesh;
 pub extern fn GenMeshKnot(radius: f32, size: f32, radSeg: c_int, sides: c_int) Mesh;
 pub extern fn GenMeshHeightmap(heightmap: Image, size: Vector3) Mesh;
 pub extern fn GenMeshCubicmap(cubicmap: Image, cubeSize: Vector3) Mesh;
-pub extern fn MeshBoundingBox(mesh: Mesh) BoundingBox;
-pub extern fn MeshTangents(mesh: [*c]Mesh) void;
-pub extern fn MeshBinormals(mesh: [*c]Mesh) void;
-pub extern fn DrawModel(model: Model, position: Vector3, scale: f32, tint: Color) void;
-pub extern fn DrawModelEx(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: f32, scale: Vector3, tint: Color) void;
-pub extern fn DrawModelWires(model: Model, position: Vector3, scale: f32, tint: Color) void;
-pub extern fn DrawModelWiresEx(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: f32, scale: Vector3, tint: Color) void;
-pub extern fn DrawBoundingBox(box: BoundingBox, color: Color) void;
-pub extern fn DrawBillboard(camera: Camera, texture: Texture2D, center: Vector3, size: f32, tint: Color) void;
-pub extern fn DrawBillboardRec(camera: Camera, texture: Texture2D, source: Rectangle, center: Vector3, size: f32, tint: Color) void;
+pub extern fn LoadMaterials(fileName: [*c]const u8, materialCount: [*c]c_int) [*c]Material;
+pub extern fn LoadMaterialDefault() Material;
+pub extern fn UnloadMaterial(material: Material) void;
+pub extern fn SetMaterialTexture(material: [*c]Material, mapType: c_int, texture: Texture2D) void;
+pub extern fn SetModelMeshMaterial(model: [*c]Model, meshId: c_int, materialId: c_int) void;
+pub extern fn LoadModelAnimations(fileName: [*c]const u8, animCount: [*c]c_uint) [*c]ModelAnimation;
+pub extern fn UpdateModelAnimation(model: Model, anim: ModelAnimation, frame: c_int) void;
+pub extern fn UnloadModelAnimation(anim: ModelAnimation) void;
+pub extern fn UnloadModelAnimations(animations: [*c]ModelAnimation, count: c_uint) void;
+pub extern fn IsModelAnimationValid(model: Model, anim: ModelAnimation) bool;
 pub extern fn CheckCollisionSpheres(center1: Vector3, radius1: f32, center2: Vector3, radius2: f32) bool;
 pub extern fn CheckCollisionBoxes(box1: BoundingBox, box2: BoundingBox) bool;
 pub extern fn CheckCollisionBoxSphere(box: BoundingBox, center: Vector3, radius: f32) bool;
-pub extern fn CheckCollisionRaySphere(ray: Ray, center: Vector3, radius: f32) bool;
-pub extern fn CheckCollisionRaySphereEx(ray: Ray, center: Vector3, radius: f32, collisionPoint: [*c]Vector3) bool;
-pub extern fn CheckCollisionRayBox(ray: Ray, box: BoundingBox) bool;
-pub extern fn GetCollisionRayMesh(ray: Ray, mesh: Mesh, transform: Matrix) RayHitInfo;
-pub extern fn GetCollisionRayModel(ray: Ray, model: Model) RayHitInfo;
-pub extern fn GetCollisionRayTriangle(ray: Ray, p1: Vector3, p2: Vector3, p3: Vector3) RayHitInfo;
-pub extern fn GetCollisionRayGround(ray: Ray, groundHeight: f32) RayHitInfo;
+pub extern fn GetRayCollisionSphere(ray: Ray, center: Vector3, radius: f32) RayCollision;
+pub extern fn GetRayCollisionBox(ray: Ray, box: BoundingBox) RayCollision;
+pub extern fn GetRayCollisionModel(ray: Ray, model: Model) RayCollision;
+pub extern fn GetRayCollisionMesh(ray: Ray, mesh: Mesh, transform: Matrix) RayCollision;
+pub extern fn GetRayCollisionTriangle(ray: Ray, p1: Vector3, p2: Vector3, p3: Vector3) RayCollision;
+pub extern fn GetRayCollisionQuad(ray: Ray, p1: Vector3, p2: Vector3, p3: Vector3, p4: Vector3) RayCollision;
 pub extern fn InitAudioDevice() void;
 pub extern fn CloseAudioDevice() void;
 pub extern fn IsAudioDeviceReady() bool;
@@ -995,7 +1065,7 @@ pub extern fn LoadWave(fileName: [*c]const u8) Wave;
 pub extern fn LoadWaveFromMemory(fileType: [*c]const u8, fileData: [*c]const u8, dataSize: c_int) Wave;
 pub extern fn LoadSound(fileName: [*c]const u8) Sound;
 pub extern fn LoadSoundFromWave(wave: Wave) Sound;
-pub extern fn UpdateSound(sound: Sound, data: ?*const c_void, samplesCount: c_int) void;
+pub extern fn UpdateSound(sound: Sound, data: ?*const anyopaque, sampleCount: c_int) void;
 pub extern fn UnloadWave(wave: Wave) void;
 pub extern fn UnloadSound(sound: Sound) void;
 pub extern fn ExportWave(wave: Wave, fileName: [*c]const u8) bool;
@@ -1019,18 +1089,19 @@ pub extern fn LoadMusicStream(fileName: [*c]const u8) Music;
 pub extern fn LoadMusicStreamFromMemory(fileType: [*c]const u8, data: [*c]u8, dataSize: c_int) Music;
 pub extern fn UnloadMusicStream(music: Music) void;
 pub extern fn PlayMusicStream(music: Music) void;
-pub extern fn IsMusicPlaying(music: Music) bool;
+pub extern fn IsMusicStreamPlaying(music: Music) bool;
 pub extern fn UpdateMusicStream(music: Music) void;
 pub extern fn StopMusicStream(music: Music) void;
 pub extern fn PauseMusicStream(music: Music) void;
 pub extern fn ResumeMusicStream(music: Music) void;
+pub extern fn SeekMusicStream(music: Music, position: f32) void;
 pub extern fn SetMusicVolume(music: Music, volume: f32) void;
 pub extern fn SetMusicPitch(music: Music, pitch: f32) void;
 pub extern fn GetMusicTimeLength(music: Music) f32;
 pub extern fn GetMusicTimePlayed(music: Music) f32;
-pub extern fn InitAudioStream(sampleRate: c_uint, sampleSize: c_uint, channels: c_uint) AudioStream;
-pub extern fn UpdateAudioStream(stream: AudioStream, data: ?*const c_void, samplesCount: c_int) void;
-pub extern fn CloseAudioStream(stream: AudioStream) void;
+pub extern fn LoadAudioStream(sampleRate: c_uint, sampleSize: c_uint, channels: c_uint) AudioStream;
+pub extern fn UnloadAudioStream(stream: AudioStream) void;
+pub extern fn UpdateAudioStream(stream: AudioStream, data: ?*const anyopaque, frameCount: c_int) void;
 pub extern fn IsAudioStreamProcessed(stream: AudioStream) bool;
 pub extern fn PlayAudioStream(stream: AudioStream) void;
 pub extern fn PauseAudioStream(stream: AudioStream) void;
@@ -1040,17 +1111,39 @@ pub extern fn StopAudioStream(stream: AudioStream) void;
 pub extern fn SetAudioStreamVolume(stream: AudioStream, volume: f32) void;
 pub extern fn SetAudioStreamPitch(stream: AudioStream, pitch: f32) void;
 pub extern fn SetAudioStreamBufferSizeDefault(size: c_int) void;
-pub const va_start = @compileError("TODO implement function '__builtin_va_start' in std.c.builtins"); // /home/shadeops/zig/lib/zig/include/stdarg.h:17:9
-pub const va_end = @compileError("TODO implement function '__builtin_va_end' in std.c.builtins"); // /home/shadeops/zig/lib/zig/include/stdarg.h:18:9
-pub const va_arg = @compileError("TODO implement function '__builtin_va_arg' in std.c.builtins"); // /home/shadeops/zig/lib/zig/include/stdarg.h:19:9
-pub const __va_copy = @compileError("TODO implement function '__builtin_va_copy' in std.c.builtins"); // /home/shadeops/zig/lib/zig/include/stdarg.h:24:9
-pub const va_copy = @compileError("TODO implement function '__builtin_va_copy' in std.c.builtins"); // /home/shadeops/zig/lib/zig/include/stdarg.h:27:9
+pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`"); // (no file):66:9
+pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`"); // (no file):72:9
+pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`"); // (no file):164:9
+pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`"); // (no file):186:9
+pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`"); // (no file):194:9
+pub const __seg_gs = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):314:9
+pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):315:9
+pub const __declspec = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):380:9
+pub const _cdecl = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):381:9
+pub const __cdecl = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):382:9
+pub const _stdcall = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):383:9
+pub const __stdcall = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):384:9
+pub const _fastcall = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):385:9
+pub const __fastcall = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):386:9
+pub const _thiscall = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):387:9
+pub const __thiscall = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):388:9
+pub const _pascal = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):389:9
+pub const __pascal = @compileError("unable to translate macro: undefined identifier `__attribute__`"); // (no file):390:9
+pub const va_start = @compileError("unable to translate macro: undefined identifier `__builtin_va_start`"); // C:\zig\lib\include\stdarg.h:17:9
+pub const va_end = @compileError("unable to translate macro: undefined identifier `__builtin_va_end`"); // C:\zig\lib\include\stdarg.h:18:9
+pub const va_arg = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg`"); // C:\zig\lib\include\stdarg.h:19:9
+pub const __va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`"); // C:\zig\lib\include\stdarg.h:24:9
+pub const va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`"); // C:\zig\lib\include\stdarg.h:27:9
+pub const RL_MALLOC = @compileError("unable to translate macro: undefined identifier `malloc`"); // libs/raylib/src/raylib.h:114:13
+pub const RL_CALLOC = @compileError("unable to translate macro: undefined identifier `calloc`"); // libs/raylib/src/raylib.h:117:13
+pub const RL_REALLOC = @compileError("unable to translate macro: undefined identifier `realloc`"); // libs/raylib/src/raylib.h:120:13
+pub const RL_FREE = @compileError("unable to translate macro: undefined identifier `free`"); // libs/raylib/src/raylib.h:123:13
 pub const __llvm__ = @as(c_int, 1);
 pub const __clang__ = @as(c_int, 1);
-pub const __clang_major__ = @as(c_int, 12);
+pub const __clang_major__ = @as(c_int, 13);
 pub const __clang_minor__ = @as(c_int, 0);
-pub const __clang_patchlevel__ = @as(c_int, 0);
-pub const __clang_version__ = "12.0.0 (https://github.com/llvm/llvm-project.git d28af7c654d8db0b68c175db5ce212d74fb5e9bc)";
+pub const __clang_patchlevel__ = @as(c_int, 1);
+pub const __clang_version__ = "13.0.1 (git@github.com:ziglang/zig-bootstrap.git 74211dd7f7e7174a2027641dfcfdb3fc5df62f0c)";
 pub const __GNUC__ = @as(c_int, 4);
 pub const __GNUC_MINOR__ = @as(c_int, 2);
 pub const __GNUC_PATCHLEVEL__ = @as(c_int, 1);
@@ -1067,83 +1160,82 @@ pub const __OPENCL_MEMORY_SCOPE_DEVICE = @as(c_int, 2);
 pub const __OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES = @as(c_int, 3);
 pub const __OPENCL_MEMORY_SCOPE_SUB_GROUP = @as(c_int, 4);
 pub const __PRAGMA_REDEFINE_EXTNAME = @as(c_int, 1);
-pub const __VERSION__ = "Clang 12.0.0 (https://github.com/llvm/llvm-project.git d28af7c654d8db0b68c175db5ce212d74fb5e9bc)";
+pub const __VERSION__ = "Clang 13.0.1 (git@github.com:ziglang/zig-bootstrap.git 74211dd7f7e7174a2027641dfcfdb3fc5df62f0c)";
 pub const __OBJC_BOOL_IS_BOOL = @as(c_int, 0);
 pub const __CONSTANT_CFSTRINGS__ = @as(c_int, 1);
+pub const __SEH__ = @as(c_int, 1);
+pub const __clang_literal_encoding__ = "UTF-8";
+pub const __clang_wide_literal_encoding__ = "UTF-16";
 pub const __OPTIMIZE__ = @as(c_int, 1);
 pub const __ORDER_LITTLE_ENDIAN__ = @as(c_int, 1234);
 pub const __ORDER_BIG_ENDIAN__ = @as(c_int, 4321);
 pub const __ORDER_PDP_ENDIAN__ = @as(c_int, 3412);
 pub const __BYTE_ORDER__ = __ORDER_LITTLE_ENDIAN__;
 pub const __LITTLE_ENDIAN__ = @as(c_int, 1);
-pub const _LP64 = @as(c_int, 1);
-pub const __LP64__ = @as(c_int, 1);
 pub const __CHAR_BIT__ = @as(c_int, 8);
 pub const __SCHAR_MAX__ = @as(c_int, 127);
 pub const __SHRT_MAX__ = @as(c_int, 32767);
 pub const __INT_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal);
-pub const __LONG_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
+pub const __LONG_MAX__ = @as(c_long, 2147483647);
 pub const __LONG_LONG_MAX__ = @as(c_longlong, 9223372036854775807);
-pub const __WCHAR_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal);
-pub const __WINT_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_uint, 4294967295, .decimal);
-pub const __INTMAX_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
-pub const __SIZE_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
-pub const __UINTMAX_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
-pub const __PTRDIFF_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
-pub const __INTPTR_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
-pub const __UINTPTR_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
+pub const __WCHAR_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 65535, .decimal);
+pub const __WINT_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 65535, .decimal);
+pub const __INTMAX_MAX__ = @as(c_longlong, 9223372036854775807);
+pub const __SIZE_MAX__ = @as(c_ulonglong, 18446744073709551615);
+pub const __UINTMAX_MAX__ = @as(c_ulonglong, 18446744073709551615);
+pub const __PTRDIFF_MAX__ = @as(c_longlong, 9223372036854775807);
+pub const __INTPTR_MAX__ = @as(c_longlong, 9223372036854775807);
+pub const __UINTPTR_MAX__ = @as(c_ulonglong, 18446744073709551615);
 pub const __SIZEOF_DOUBLE__ = @as(c_int, 8);
 pub const __SIZEOF_FLOAT__ = @as(c_int, 4);
 pub const __SIZEOF_INT__ = @as(c_int, 4);
-pub const __SIZEOF_LONG__ = @as(c_int, 8);
+pub const __SIZEOF_LONG__ = @as(c_int, 4);
 pub const __SIZEOF_LONG_DOUBLE__ = @as(c_int, 16);
 pub const __SIZEOF_LONG_LONG__ = @as(c_int, 8);
 pub const __SIZEOF_POINTER__ = @as(c_int, 8);
 pub const __SIZEOF_SHORT__ = @as(c_int, 2);
 pub const __SIZEOF_PTRDIFF_T__ = @as(c_int, 8);
 pub const __SIZEOF_SIZE_T__ = @as(c_int, 8);
-pub const __SIZEOF_WCHAR_T__ = @as(c_int, 4);
-pub const __SIZEOF_WINT_T__ = @as(c_int, 4);
+pub const __SIZEOF_WCHAR_T__ = @as(c_int, 2);
+pub const __SIZEOF_WINT_T__ = @as(c_int, 2);
 pub const __SIZEOF_INT128__ = @as(c_int, 16);
-pub const __INTMAX_TYPE__ = c_long;
-pub const __INTMAX_FMTd__ = "ld";
-pub const __INTMAX_FMTi__ = "li";
-//pub const __INTMAX_C_SUFFIX__ = L;
-pub const __UINTMAX_TYPE__ = c_ulong;
-pub const __UINTMAX_FMTo__ = "lo";
-pub const __UINTMAX_FMTu__ = "lu";
-pub const __UINTMAX_FMTx__ = "lx";
-pub const __UINTMAX_FMTX__ = "lX";
-//pub const __UINTMAX_C_SUFFIX__ = UL;
+pub const __INTMAX_TYPE__ = c_longlong;
+pub const __INTMAX_FMTd__ = "lld";
+pub const __INTMAX_FMTi__ = "lli";
+pub const __UINTMAX_TYPE__ = c_ulonglong;
+pub const __UINTMAX_FMTo__ = "llo";
+pub const __UINTMAX_FMTu__ = "llu";
+pub const __UINTMAX_FMTx__ = "llx";
+pub const __UINTMAX_FMTX__ = "llX";
 pub const __INTMAX_WIDTH__ = @as(c_int, 64);
-pub const __PTRDIFF_TYPE__ = c_long;
-pub const __PTRDIFF_FMTd__ = "ld";
-pub const __PTRDIFF_FMTi__ = "li";
+pub const __PTRDIFF_TYPE__ = c_longlong;
+pub const __PTRDIFF_FMTd__ = "lld";
+pub const __PTRDIFF_FMTi__ = "lli";
 pub const __PTRDIFF_WIDTH__ = @as(c_int, 64);
-pub const __INTPTR_TYPE__ = c_long;
-pub const __INTPTR_FMTd__ = "ld";
-pub const __INTPTR_FMTi__ = "li";
+pub const __INTPTR_TYPE__ = c_longlong;
+pub const __INTPTR_FMTd__ = "lld";
+pub const __INTPTR_FMTi__ = "lli";
 pub const __INTPTR_WIDTH__ = @as(c_int, 64);
-pub const __SIZE_TYPE__ = c_ulong;
-pub const __SIZE_FMTo__ = "lo";
-pub const __SIZE_FMTu__ = "lu";
-pub const __SIZE_FMTx__ = "lx";
-pub const __SIZE_FMTX__ = "lX";
+pub const __SIZE_TYPE__ = c_ulonglong;
+pub const __SIZE_FMTo__ = "llo";
+pub const __SIZE_FMTu__ = "llu";
+pub const __SIZE_FMTx__ = "llx";
+pub const __SIZE_FMTX__ = "llX";
 pub const __SIZE_WIDTH__ = @as(c_int, 64);
-pub const __WCHAR_TYPE__ = c_int;
-pub const __WCHAR_WIDTH__ = @as(c_int, 32);
-pub const __WINT_TYPE__ = c_uint;
-pub const __WINT_WIDTH__ = @as(c_int, 32);
+pub const __WCHAR_TYPE__ = c_ushort;
+pub const __WCHAR_WIDTH__ = @as(c_int, 16);
+pub const __WINT_TYPE__ = c_ushort;
+pub const __WINT_WIDTH__ = @as(c_int, 16);
 pub const __SIG_ATOMIC_WIDTH__ = @as(c_int, 32);
 pub const __SIG_ATOMIC_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal);
 pub const __CHAR16_TYPE__ = c_ushort;
 pub const __CHAR32_TYPE__ = c_uint;
 pub const __UINTMAX_WIDTH__ = @as(c_int, 64);
-pub const __UINTPTR_TYPE__ = c_ulong;
-pub const __UINTPTR_FMTo__ = "lo";
-pub const __UINTPTR_FMTu__ = "lu";
-pub const __UINTPTR_FMTx__ = "lx";
-pub const __UINTPTR_FMTX__ = "lX";
+pub const __UINTPTR_TYPE__ = c_ulonglong;
+pub const __UINTPTR_FMTo__ = "llo";
+pub const __UINTPTR_FMTu__ = "llu";
+pub const __UINTPTR_FMTx__ = "llx";
+pub const __UINTPTR_FMTX__ = "llX";
 pub const __UINTPTR_WIDTH__ = @as(c_int, 64);
 pub const __FLT_DENORM_MIN__ = @as(f32, 1.40129846e-45);
 pub const __FLT_HAS_DENORM__ = @as(c_int, 1);
@@ -1189,25 +1281,29 @@ pub const __LDBL_MIN_EXP__ = -@as(c_int, 16381);
 pub const __LDBL_MIN__ = @as(c_longdouble, 3.36210314311209350626e-4932);
 pub const __POINTER_WIDTH__ = @as(c_int, 64);
 pub const __BIGGEST_ALIGNMENT__ = @as(c_int, 16);
+pub const __WCHAR_UNSIGNED__ = @as(c_int, 1);
 pub const __WINT_UNSIGNED__ = @as(c_int, 1);
 pub const __INT8_TYPE__ = i8;
 pub const __INT8_FMTd__ = "hhd";
 pub const __INT8_FMTi__ = "hhi";
+pub const __INT8_C_SUFFIX__ = "";
 pub const __INT16_TYPE__ = c_short;
 pub const __INT16_FMTd__ = "hd";
 pub const __INT16_FMTi__ = "hi";
+pub const __INT16_C_SUFFIX__ = "";
 pub const __INT32_TYPE__ = c_int;
 pub const __INT32_FMTd__ = "d";
 pub const __INT32_FMTi__ = "i";
-pub const __INT64_TYPE__ = c_long;
-pub const __INT64_FMTd__ = "ld";
-pub const __INT64_FMTi__ = "li";
-//pub const __INT64_C_SUFFIX__ = L;
+pub const __INT32_C_SUFFIX__ = "";
+pub const __INT64_TYPE__ = c_longlong;
+pub const __INT64_FMTd__ = "lld";
+pub const __INT64_FMTi__ = "lli";
 pub const __UINT8_TYPE__ = u8;
 pub const __UINT8_FMTo__ = "hho";
 pub const __UINT8_FMTu__ = "hhu";
 pub const __UINT8_FMTx__ = "hhx";
 pub const __UINT8_FMTX__ = "hhX";
+pub const __UINT8_C_SUFFIX__ = "";
 pub const __UINT8_MAX__ = @as(c_int, 255);
 pub const __INT8_MAX__ = @as(c_int, 127);
 pub const __UINT16_TYPE__ = c_ushort;
@@ -1215,6 +1311,7 @@ pub const __UINT16_FMTo__ = "ho";
 pub const __UINT16_FMTu__ = "hu";
 pub const __UINT16_FMTx__ = "hx";
 pub const __UINT16_FMTX__ = "hX";
+pub const __UINT16_C_SUFFIX__ = "";
 pub const __UINT16_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 65535, .decimal);
 pub const __INT16_MAX__ = @as(c_int, 32767);
 pub const __UINT32_TYPE__ = c_uint;
@@ -1222,17 +1319,15 @@ pub const __UINT32_FMTo__ = "o";
 pub const __UINT32_FMTu__ = "u";
 pub const __UINT32_FMTx__ = "x";
 pub const __UINT32_FMTX__ = "X";
-//pub const __UINT32_C_SUFFIX__ = U;
 pub const __UINT32_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_uint, 4294967295, .decimal);
 pub const __INT32_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal);
-pub const __UINT64_TYPE__ = c_ulong;
-pub const __UINT64_FMTo__ = "lo";
-pub const __UINT64_FMTu__ = "lu";
-pub const __UINT64_FMTx__ = "lx";
-pub const __UINT64_FMTX__ = "lX";
-//pub const __UINT64_C_SUFFIX__ = UL;
-pub const __UINT64_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
-pub const __INT64_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
+pub const __UINT64_TYPE__ = c_ulonglong;
+pub const __UINT64_FMTo__ = "llo";
+pub const __UINT64_FMTu__ = "llu";
+pub const __UINT64_FMTx__ = "llx";
+pub const __UINT64_FMTX__ = "llX";
+pub const __UINT64_MAX__ = @as(c_ulonglong, 18446744073709551615);
+pub const __INT64_MAX__ = @as(c_longlong, 9223372036854775807);
 pub const __INT_LEAST8_TYPE__ = i8;
 pub const __INT_LEAST8_MAX__ = @as(c_int, 127);
 pub const __INT_LEAST8_FMTd__ = "hhd";
@@ -1263,16 +1358,16 @@ pub const __UINT_LEAST32_FMTo__ = "o";
 pub const __UINT_LEAST32_FMTu__ = "u";
 pub const __UINT_LEAST32_FMTx__ = "x";
 pub const __UINT_LEAST32_FMTX__ = "X";
-pub const __INT_LEAST64_TYPE__ = c_long;
-pub const __INT_LEAST64_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
-pub const __INT_LEAST64_FMTd__ = "ld";
-pub const __INT_LEAST64_FMTi__ = "li";
-pub const __UINT_LEAST64_TYPE__ = c_ulong;
-pub const __UINT_LEAST64_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
-pub const __UINT_LEAST64_FMTo__ = "lo";
-pub const __UINT_LEAST64_FMTu__ = "lu";
-pub const __UINT_LEAST64_FMTx__ = "lx";
-pub const __UINT_LEAST64_FMTX__ = "lX";
+pub const __INT_LEAST64_TYPE__ = c_longlong;
+pub const __INT_LEAST64_MAX__ = @as(c_longlong, 9223372036854775807);
+pub const __INT_LEAST64_FMTd__ = "lld";
+pub const __INT_LEAST64_FMTi__ = "lli";
+pub const __UINT_LEAST64_TYPE__ = c_ulonglong;
+pub const __UINT_LEAST64_MAX__ = @as(c_ulonglong, 18446744073709551615);
+pub const __UINT_LEAST64_FMTo__ = "llo";
+pub const __UINT_LEAST64_FMTu__ = "llu";
+pub const __UINT_LEAST64_FMTx__ = "llx";
+pub const __UINT_LEAST64_FMTX__ = "llX";
 pub const __INT_FAST8_TYPE__ = i8;
 pub const __INT_FAST8_MAX__ = @as(c_int, 127);
 pub const __INT_FAST8_FMTd__ = "hhd";
@@ -1303,16 +1398,17 @@ pub const __UINT_FAST32_FMTo__ = "o";
 pub const __UINT_FAST32_FMTu__ = "u";
 pub const __UINT_FAST32_FMTx__ = "x";
 pub const __UINT_FAST32_FMTX__ = "X";
-pub const __INT_FAST64_TYPE__ = c_long;
-pub const __INT_FAST64_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
-pub const __INT_FAST64_FMTd__ = "ld";
-pub const __INT_FAST64_FMTi__ = "li";
-pub const __UINT_FAST64_TYPE__ = c_ulong;
-pub const __UINT_FAST64_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
-pub const __UINT_FAST64_FMTo__ = "lo";
-pub const __UINT_FAST64_FMTu__ = "lu";
-pub const __UINT_FAST64_FMTx__ = "lx";
-pub const __UINT_FAST64_FMTX__ = "lX";
+pub const __INT_FAST64_TYPE__ = c_longlong;
+pub const __INT_FAST64_MAX__ = @as(c_longlong, 9223372036854775807);
+pub const __INT_FAST64_FMTd__ = "lld";
+pub const __INT_FAST64_FMTi__ = "lli";
+pub const __UINT_FAST64_TYPE__ = c_ulonglong;
+pub const __UINT_FAST64_MAX__ = @as(c_ulonglong, 18446744073709551615);
+pub const __UINT_FAST64_FMTo__ = "llo";
+pub const __UINT_FAST64_FMTu__ = "llu";
+pub const __UINT_FAST64_FMTx__ = "llx";
+pub const __UINT_FAST64_FMTX__ = "llX";
+pub const __USER_LABEL_PREFIX__ = "";
 pub const __FINITE_MATH_ONLY__ = @as(c_int, 0);
 pub const __GNUC_STDC_INLINE__ = @as(c_int, 1);
 pub const __GCC_ATOMIC_TEST_AND_SET_TRUEVAL = @as(c_int, 1);
@@ -1336,6 +1432,8 @@ pub const __GCC_ATOMIC_INT_LOCK_FREE = @as(c_int, 2);
 pub const __GCC_ATOMIC_LONG_LOCK_FREE = @as(c_int, 2);
 pub const __GCC_ATOMIC_LLONG_LOCK_FREE = @as(c_int, 2);
 pub const __GCC_ATOMIC_POINTER_LOCK_FREE = @as(c_int, 2);
+pub const __PIC__ = @as(c_int, 2);
+pub const __pic__ = @as(c_int, 2);
 pub const __FLT_EVAL_METHOD__ = @as(c_int, 0);
 pub const __FLT_RADIX__ = @as(c_int, 2);
 pub const __DECIMAL_DIG__ = __LDBL_DECIMAL_DIG__;
@@ -1347,11 +1445,10 @@ pub const __x86_64 = @as(c_int, 1);
 pub const __x86_64__ = @as(c_int, 1);
 pub const __SEG_GS = @as(c_int, 1);
 pub const __SEG_FS = @as(c_int, 1);
-//pub const __seg_gs = __attribute__(address_space(@as(c_int, 256)));
-//pub const __seg_fs = __attribute__(address_space(@as(c_int, 257)));
 pub const __znver2 = @as(c_int, 1);
 pub const __znver2__ = @as(c_int, 1);
 pub const __tune_znver2__ = @as(c_int, 1);
+pub const __REGISTER_PREFIX__ = "";
 pub const __NO_MATH_INLINES = @as(c_int, 1);
 pub const __AES__ = @as(c_int, 1);
 pub const __PCLMUL__ = @as(c_int, 1);
@@ -1398,47 +1495,45 @@ pub const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 = @as(c_int, 1);
 pub const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = @as(c_int, 1);
 pub const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_16 = @as(c_int, 1);
 pub const __SIZEOF_FLOAT128__ = @as(c_int, 16);
-pub const unix = @as(c_int, 1);
-pub const __unix = @as(c_int, 1);
-pub const __unix__ = @as(c_int, 1);
-pub const linux = @as(c_int, 1);
-pub const __linux = @as(c_int, 1);
-pub const __linux__ = @as(c_int, 1);
-pub const __ELF__ = @as(c_int, 1);
-pub const __gnu_linux__ = @as(c_int, 1);
-pub const __FLOAT128__ = @as(c_int, 1);
+pub const _WIN32 = @as(c_int, 1);
+pub const _WIN64 = @as(c_int, 1);
+pub const WIN32 = @as(c_int, 1);
+pub const __WIN32 = @as(c_int, 1);
+pub const __WIN32__ = @as(c_int, 1);
+pub const WINNT = @as(c_int, 1);
+pub const __WINNT = @as(c_int, 1);
+pub const __WINNT__ = @as(c_int, 1);
+pub const WIN64 = @as(c_int, 1);
+pub const __WIN64 = @as(c_int, 1);
+pub const __WIN64__ = @as(c_int, 1);
+pub const __MINGW64__ = @as(c_int, 1);
+pub const __MSVCRT__ = @as(c_int, 1);
+pub const __MINGW32__ = @as(c_int, 1);
 pub const __STDC__ = @as(c_int, 1);
 pub const __STDC_HOSTED__ = @as(c_int, 1);
 pub const __STDC_VERSION__ = @as(c_long, 201710);
 pub const __STDC_UTF_16__ = @as(c_int, 1);
 pub const __STDC_UTF_32__ = @as(c_int, 1);
 pub const _DEBUG = @as(c_int, 1);
+pub const RAYLIB_H = "";
+pub const __STDARG_H = "";
+pub const _VA_LIST = "";
 pub const __GNUC_VA_LIST = @as(c_int, 1);
+pub const RAYLIB_VERSION = "4.0";
+pub const RLAPI = "";
 pub const PI = @as(f32, 3.14159265358979323846);
 pub const DEG2RAD = PI / @as(f32, 180.0);
 pub const RAD2DEG = @as(f32, 180.0) / PI;
-pub inline fn RL_MALLOC(sz: anytype) @TypeOf(malloc(sz)) {
-    _ = sz;
-    return malloc(sz);
+pub inline fn CLITERAL(@"type": anytype) @TypeOf(@"type") {
+    return @"type";
 }
-pub inline fn RL_CALLOC(n: anytype, sz: anytype) @TypeOf(calloc(n, sz)) {
-    _ = n;
-    _ = sz;
-    return calloc(n, sz);
-}
-pub inline fn RL_REALLOC(ptr: anytype, sz: anytype) @TypeOf(realloc(ptr, sz)) {
-    _ = ptr;
-    _ = sz;
-    return realloc(ptr, sz);
-}
-pub inline fn RL_FREE(ptr: anytype) @TypeOf(free(ptr)) {
-    _ = ptr;
-    return free(ptr);
-}
-pub inline fn CLITERAL(type_1: anytype) @TypeOf(type_1) {
-    _ = type_1;
-    return type_1;
-}
+pub const RL_COLOR_TYPE = "";
+pub const RL_RECTANGLE_TYPE = "";
+pub const RL_VECTOR2_TYPE = "";
+pub const RL_VECTOR3_TYPE = "";
+pub const RL_VECTOR4_TYPE = "";
+pub const RL_QUATERNION_TYPE = "";
+pub const RL_MATRIX_TYPE = "";
 pub const LIGHTGRAY = @import("std").mem.zeroInit(CLITERAL(Color), .{ @as(c_int, 200), @as(c_int, 200), @as(c_int, 200), @as(c_int, 255) });
 pub const GRAY = @import("std").mem.zeroInit(CLITERAL(Color), .{ @as(c_int, 130), @as(c_int, 130), @as(c_int, 130), @as(c_int, 255) });
 pub const DARKGRAY = @import("std").mem.zeroInit(CLITERAL(Color), .{ @as(c_int, 80), @as(c_int, 80), @as(c_int, 80), @as(c_int, 255) });
@@ -1465,28 +1560,15 @@ pub const BLACK = @import("std").mem.zeroInit(CLITERAL(Color), .{ @as(c_int, 0),
 pub const BLANK = @import("std").mem.zeroInit(CLITERAL(Color), .{ @as(c_int, 0), @as(c_int, 0), @as(c_int, 0), @as(c_int, 0) });
 pub const MAGENTA = @import("std").mem.zeroInit(CLITERAL(Color), .{ @as(c_int, 255), @as(c_int, 0), @as(c_int, 255), @as(c_int, 255) });
 pub const RAYWHITE = @import("std").mem.zeroInit(CLITERAL(Color), .{ @as(c_int, 245), @as(c_int, 245), @as(c_int, 245), @as(c_int, 255) });
-pub const FormatText = TextFormat;
-pub const LoadText = LoadFileText;
-pub const GetExtension = GetFileExtension;
-pub const GetImageData = LoadImageColors;
-pub const FILTER_POINT = TEXTURE_FILTER_POINT;
-pub const FILTER_BILINEAR = TEXTURE_FILTER_BILINEAR;
-pub const MAP_DIFFUSE = MATERIAL_MAP_DIFFUSE;
-pub const PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = PIXELFORMAT_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8;
-pub const bool_1 = bool;
-pub const true_2 = @as(c_int, 1);
-pub const false_3 = @as(c_int, 0);
+pub const __STDBOOL_H = "";
+pub const @"bool" = bool;
+pub const @"true" = @as(c_int, 1);
+pub const @"false" = @as(c_int, 0);
 pub const __bool_true_false_are_defined = @as(c_int, 1);
-pub const SpriteFont = Font;
+pub const MOUSE_LEFT_BUTTON = MOUSE_BUTTON_LEFT;
+pub const MOUSE_RIGHT_BUTTON = MOUSE_BUTTON_RIGHT;
+pub const MOUSE_MIDDLE_BUTTON = MOUSE_BUTTON_MIDDLE;
 pub const MATERIAL_MAP_DIFFUSE = MATERIAL_MAP_ALBEDO;
 pub const MATERIAL_MAP_SPECULAR = MATERIAL_MAP_METALNESS;
 pub const SHADER_LOC_MAP_DIFFUSE = SHADER_LOC_MAP_ALBEDO;
 pub const SHADER_LOC_MAP_SPECULAR = SHADER_LOC_MAP_METALNESS;
-pub const __va_list_tag = struct___va_list_tag;
-pub extern fn malloc(__size: c_ulong) ?*c_void;
-pub extern fn calloc(__nmemb: c_ulong, __size: c_ulong) ?*c_void;
-pub extern fn realloc(__ptr: ?*c_void, __size: c_ulong) ?*c_void;
-pub extern fn reallocarray(__ptr: ?*c_void, __nmemb: usize, __size: usize) ?*c_void;
-pub extern fn free(__ptr: ?*c_void) void;
-pub extern fn alloca(__size: c_ulong) ?*c_void;
-pub extern fn valloc(__size: usize) ?*c_void;

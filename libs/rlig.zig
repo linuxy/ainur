@@ -126,7 +126,7 @@ fn rlImGuiEvents() void {
         ig.ImGuiIO_AddInputCharacter(io, @intCast(c_uint, pressed));
 }
 
-pub extern fn memcpy(__dest: ?*c_void, __src: ?*const c_void, __n: c_ulong) ?*c_void;
+pub extern fn memcpy(__dest: ?*anyopaque, __src: ?*const anyopaque, __n: c_ulong) ?*anyopaque;
 
 fn rlImGuiReloadFonts() void {
     var io: *ig.ImGuiIO = ig.igGetIO();
@@ -144,7 +144,7 @@ fn rlImGuiReloadFonts() void {
     };
 
     fontTex = rl.LoadTextureFromImage(fontAtlas);
-    io.Fonts.*.TexID = @intToPtr(*c_void, fontTex.id);
+    io.Fonts.*.TexID = @intToPtr(*anyopaque, fontTex.id);
 
     rl.UnloadImage(fontAtlas);
 }
@@ -168,7 +168,7 @@ fn rlImGuiBuildFontExt(filePath: []const u8, size: f32) void {
     };
 
     fontTex = rl.LoadTextureFromImage(fontAtlas);
-    io.Fonts.*.TexID = @intToPtr(*c_void, fontTex.id);
+    io.Fonts.*.TexID = @intToPtr(*anyopaque, fontTex.id);
 
     rl.UnloadImage(fontAtlas);
 }

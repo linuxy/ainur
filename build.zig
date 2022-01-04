@@ -42,7 +42,7 @@ pub fn build(b: *std.build.Builder) void {
     run_step.dependOn(&run_cmd.step);
 }
 
-pub fn link(b: *std.build.Builder, exe: *std.build.LibExeObjStep, target: std.build.Target) void {
+pub fn link(b: *std.build.Builder, exe: *std.build.LibExeObjStep, target: std.zig.CrossTarget) void {
     // Link step
     exe.linkLibrary(imguiLibrary(b, target));
     exe.linkLibrary(raylibLibrary(b, target));
@@ -53,7 +53,7 @@ pub fn link(b: *std.build.Builder, exe: *std.build.LibExeObjStep, target: std.bu
     exe.addPackage(nbnetPkg);
 }
 
-pub fn imguiLibrary(b: *std.build.Builder, target: std.build.Target) *std.build.LibExeObjStep {
+pub fn imguiLibrary(b: *std.build.Builder, target: std.zig.CrossTarget) *std.build.LibExeObjStep {
     comptime var path = getRelativePath();
     var imgui = b.addStaticLibrary("imgui", null);
     imgui.linkLibC();
@@ -83,7 +83,7 @@ pub fn imguiLibrary(b: *std.build.Builder, target: std.build.Target) *std.build.
     return imgui;
 }
 
-pub fn raylibLibrary(b: *std.build.Builder, target: std.build.Target) *std.build.LibExeObjStep {
+pub fn raylibLibrary(b: *std.build.Builder, target: std.zig.CrossTarget) *std.build.LibExeObjStep {
     comptime var path = getRelativePath();
     var raylib = b.addStaticLibrary("raylib", null);
     raylib.linkLibC();
@@ -127,9 +127,10 @@ const fs = std.fs;
 /// TODO: Lookup where zig defines the output folder to make it more bulletproof.
 pub fn addBinaryContent(comptime baseContentPath: []const u8) AddContentErrors!void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var allocator = gpa.allocator();
 
-    const zigBin: []const u8 = std.fs.path.join(&gpa.allocator, &[_][]const u8{ "zig-out", "bin" }) catch return error.FolderError;
-    defer gpa.allocator.free(zigBin);
+    const zigBin: []const u8 = std.fs.path.join(allocator, &[_][]const u8{ "zig-out", "bin" }) catch return error.FolderError;
+    defer allocator.free(zigBin);
     fs.cwd().makePath(zigBin) catch return error.FolderError;
 
     var sourceFolder: fs.Dir = fs.cwd().openDir(baseContentPath, .{ .iterate = true }) catch return error.FolderError;
@@ -138,11 +139,11 @@ pub fn addBinaryContent(comptime baseContentPath: []const u8) AddContentErrors!v
     while (iterator.next() catch return error.FolderError) |target| {
         var x: fs.Dir.Entry = target;
         if (x.kind == .Directory) {
-            const source: []const u8 = std.fs.path.join(&gpa.allocator, &[_][]const u8{ baseContentPath, x.name }) catch return error.RecursionError;
-            const targetFolder: []const u8 = std.fs.path.join(&gpa.allocator, &[_][]const u8{ zigBin, x.name }) catch return error.RecursionError;
-            defer gpa.allocator.free(source);
-            defer gpa.allocator.free(targetFolder);
-            try innerAddContent(&gpa.allocator, source, targetFolder);
+            const source: []const u8 = std.fs.path.join(allocator, &[_][]const u8{ baseContentPath, x.name }) catch return error.RecursionError;
+            const targetFolder: []const u8 = std.fs.path.join(allocator, &[_][]const u8{ zigBin, x.name }) catch return error.RecursionError;
+            defer allocator.free(source);
+            defer allocator.free(targetFolder);
+            try innerAddContent(allocator, source, targetFolder);
         }
         if (x.kind == .File) {
             try copy(baseContentPath, zigBin, x.name);
@@ -150,7 +151,7 @@ pub fn addBinaryContent(comptime baseContentPath: []const u8) AddContentErrors!v
     }
 }
 
-fn innerAddContent(allocator: *std.mem.Allocator, folder: []const u8, dest: []const u8) AddContentErrors!void {
+fn innerAddContent(allocator: std.mem.Allocator, folder: []const u8, dest: []const u8) AddContentErrors!void {
     var sourceFolder: fs.Dir = fs.cwd().openDir(folder, .{ .iterate = true }) catch return error.FolderError;
     defer sourceFolder.close();
 
