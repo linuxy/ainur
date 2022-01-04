@@ -17,7 +17,6 @@ Building
 ```
 [nobody@void ainur]$ ./generate.sh
 [nobody@void ainur]$ zig build
-COPY: example/assets/public-sans.ttf to zig-out/bin/public-sans.ttf
 COPY: example/assets/RobotoMono-Regular.ttf to zig-out/bin/RobotoMono-Regular.ttf
 [nobody@void ainur]$ ./zig-out/bin/example
 ```
