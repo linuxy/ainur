@@ -1,7 +1,7 @@
 # ainur
 A simple zig gamedev template for raylib+imgui, nbnet and zlm
 
-Builds against zig 0.9.0-dev.1561+5ebdc8c46
+Builds against zig 0.9.0
 
 Verified building for Windows 11 and Void Linux using the following packages:
 
